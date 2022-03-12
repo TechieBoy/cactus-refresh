@@ -1,11 +1,11 @@
 <head>
-  <link rel="preload" href="{{ " lib/font-awesome/webfonts/fa-brands-400.woff2" | relURL }}" as="font" type="font/woff2"
+  <link rel="preload" href="{{ "lib/font-awesome/webfonts/fa-brands-400.woff2" | relURL }}" as="font" type="font/woff2"
     crossorigin="anonymous">
-  <link rel="preload" href="{{ " lib/font-awesome/webfonts/fa-regular-400.woff2" | relURL }}" as="font"
+  <link rel="preload" href="{{ "lib/font-awesome/webfonts/fa-regular-400.woff2" | relURL }}" as="font"
     type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="{{ " lib/font-awesome/webfonts/fa-solid-900.woff2" | relURL }}" as="font" type="font/woff2"
+  <link rel="preload" href="{{ "lib/font-awesome/webfonts/fa-solid-900.woff2" | relURL }}" as="font" type="font/woff2"
     crossorigin="anonymous">
-  <link rel="preload" href="{{ " lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" | relURL }}" as="font"
+  <link rel="preload" href="{{ "lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" | relURL }}" as="font"
     type="font/woff2" crossorigin="anonymous">
   {{ if eq .Site.Params.Comments.Engine "cactus_comments" }}
   <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
@@ -18,8 +18,10 @@
   {{ with .Site.Params.description }}
   <meta name="description" content="{{ . }}">{{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="all,follow">
-  <meta name="googlebot" content="index,follow,snippet,archive">
+  {{ if or (eq .Kind "section") (eq .Kind "taxonomy") (eq .Kind "term") }}
+  <meta name="robots" content="noindex">
+  {{ end }}
+
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
   {{ .Scratch.Set "colortheme" "white"}}
